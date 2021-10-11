@@ -27,7 +27,7 @@ namespace WindowsFormsApp1
         /// <summary>
         /// Acceptable values for beat field. In part 2 these will be read from a database reference table.
         /// </summary>
-        private List<string> _beatList = new List<string>()
+        private readonly List<string> _beatList = new List<string>()
             {
                 "1A", "1B", "1C", "2A", "2B", "2C", "3A", "3B", "3C", "3M", "4A",
                 "4B", "4C", "5A", "5B", "5C", "6A", "6B", "6C"

@@ -37,6 +37,7 @@
             this.cboInspectRowIndices = new System.Windows.Forms.ComboBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.OleDbLoadButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -78,6 +79,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.OleDbLoadButton);
             this.panel1.Controls.Add(this.cmdReview);
             this.panel1.Controls.Add(this.cmdExit);
             this.panel1.Controls.Add(this.cboInspectRowIndices);
@@ -147,6 +149,16 @@
             this.dataGridView2.Size = new System.Drawing.Size(755, 141);
             this.dataGridView2.TabIndex = 2;
             // 
+            // OleDbLoadButton
+            // 
+            this.OleDbLoadButton.Location = new System.Drawing.Point(426, 24);
+            this.OleDbLoadButton.Name = "OleDbLoadButton";
+            this.OleDbLoadButton.Size = new System.Drawing.Size(75, 23);
+            this.OleDbLoadButton.TabIndex = 6;
+            this.OleDbLoadButton.Text = "OleDb load";
+            this.OleDbLoadButton.UseVisualStyleBackColor = true;
+            this.OleDbLoadButton.Click += new System.EventHandler(this.OleDbLoadButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -179,6 +191,7 @@
         private System.Windows.Forms.ComboBox cboInspectRowIndices;
         private System.Windows.Forms.Button cmdExit;
         private System.Windows.Forms.Button cmdReview;
+        private System.Windows.Forms.Button OleDbLoadButton;
     }
 }
 

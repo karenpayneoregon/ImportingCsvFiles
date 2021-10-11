@@ -133,5 +133,28 @@ namespace WindowsFormsApp1
         {
             Close();
         }
+
+        private void OleDbLoadButton_Click(object sender, EventArgs e)
+        {
+            var operations = new FileOperations();
+
+            var (table, exceptions) = operations.LoadCsvFileOleDb();
+
+            if (exceptions != null)
+            {
+                MessageBox.Show($"Issue loading data\n{exceptions.Message}");
+                return;
+            }
+            
+            var f = new OleDbReadForm(table);
+            try
+            {
+                f.ShowDialog();
+            }
+            finally
+            {
+                f.Dispose();
+            }
+        }
     }
 }

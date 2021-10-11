@@ -28,7 +28,7 @@ namespace WindowsFormsApp1.Classes
         /// This method is fine if each column data is the correct type,
         /// if not then a manual parse (as shown with StreamReader and TextFieldParser are better chooses)
         /// </remarks>
-        public DataTable LoadCsvFileOleDb()
+        public (DataTable table, Exception exception) LoadCsvFileOleDb()
         {
             var connString = $@"Provider=Microsoft.Jet.OleDb.4.0; Data Source={Path.GetDirectoryName(_inputFileName)};Extended Properties=""Text;HDR=YES;FMT=Delimited""";
 
@@ -53,11 +53,10 @@ namespace WindowsFormsApp1.Classes
             }
             catch (Exception ex)
             {
-                mHasException = true;
-                mLastException = ex;
+                return (null, ex);
             }
 
-            return dt;
+            return (dt, null);
         }
 
         /// <summary>
@@ -251,13 +250,14 @@ namespace WindowsFormsApp1.Classes
                         /*
                          * These columns are checked for proper types
                          */
-                        var validRow = DateTime.TryParse(parts[0], out var d) &&
-                                       float.TryParse(parts[7].Trim(), out latitude) &&
-                                       float.TryParse(parts[8].Trim(), out longitude) &&
-                                       int.TryParse(parts[2], out district) &&
-                                       int.TryParse(parts[4], out grid) &&
-                                       !string.IsNullOrWhiteSpace(parts[5]) &&
-                                       int.TryParse(parts[6], out nCode);
+                        var validRow = 
+                            DateTime.TryParse(parts[0], out var d) && 
+                            float.TryParse(parts[7].Trim(), out latitude) && 
+                            float.TryParse(parts[8].Trim(), out longitude) && 
+                            int.TryParse(parts[2], out district) && 
+                            int.TryParse(parts[4], out grid) && 
+                            !string.IsNullOrWhiteSpace(parts[5]) && 
+                            int.TryParse(parts[6], out nCode);
 
                         /*
                          * Questionable fields
