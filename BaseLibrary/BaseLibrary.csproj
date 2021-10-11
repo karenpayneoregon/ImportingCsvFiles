@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="BaseExceptionProperties.cs" />
     <Compile Include="BaseSqlServerConnections.cs" />
+    <Compile Include="DirectoryHelper.cs" />
+    <Compile Include="GeoExtensions.cs" />
     <Compile Include="IDbExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

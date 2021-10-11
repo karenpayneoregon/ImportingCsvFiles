@@ -30,9 +30,11 @@ namespace WindowsFormsApp1.Classes
         /// </remarks>
         public (DataTable table, Exception exception) LoadCsvFileOleDb()
         {
-            var connString = $@"Provider=Microsoft.Jet.OleDb.4.0; Data Source={Path.GetDirectoryName(_inputFileName)};Extended Properties=""Text;HDR=YES;FMT=Delimited""";
+            var connString = 
+                $@"Provider=Microsoft.Jet.OleDb.4.0; " + 
+                $"Data Source={Path.GetDirectoryName(_inputFileName)};Extended Properties=\"Text;HDR=YES;FMT=Delimited\"";
 
-            var dt = new DataTable();
+            var table = new DataTable();
 
             try
             {
@@ -46,8 +48,10 @@ namespace WindowsFormsApp1.Classes
                     {
                         var ds = new DataSet("Demo");
                         adapter.Fill(ds);
+
                         ds.Tables[0].TableName = Path.GetFileNameWithoutExtension(_inputFileName);
-                        dt = ds.Tables[0];
+                        table = ds.Tables[0];
+
                     }
                 }
             }
@@ -56,7 +60,7 @@ namespace WindowsFormsApp1.Classes
                 return (null, ex);
             }
 
-            return (dt, null);
+            return (table, null);
         }
 
         /// <summary>
@@ -197,7 +201,7 @@ namespace WindowsFormsApp1.Classes
 
             int district = 0;
             int grid = 0;
-            int nCode = 0;
+            int ucrNcicCode = 0;
             float latitude = 0;
             float longitude = 0;
 
@@ -239,7 +243,13 @@ namespace WindowsFormsApp1.Classes
 
                         if (parts.Length != 9)
                         {
-                            invalidRows.Add(new DataItemInvalid() { Row = index, Line = string.Join(",", parts) });
+                            
+                            invalidRows.Add(new DataItemInvalid()
+                            {
+                                Row = index, 
+                                Line = string.Join(",", parts)
+                            });
+
                             continue;
 
                         }
@@ -251,17 +261,17 @@ namespace WindowsFormsApp1.Classes
                          * These columns are checked for proper types
                          */
                         var validRow = 
-                            DateTime.TryParse(parts[0], out var d) && 
+                            DateTime.TryParse(parts[0], out var cdatetime) && 
                             float.TryParse(parts[7].Trim(), out latitude) && 
                             float.TryParse(parts[8].Trim(), out longitude) && 
                             int.TryParse(parts[2], out district) && 
                             int.TryParse(parts[4], out grid) && 
                             !string.IsNullOrWhiteSpace(parts[5]) && 
-                            int.TryParse(parts[6], out nCode);
+                            int.TryParse(parts[6], out ucrNcicCode);
 
-                        /*
+                        /*---------------------------------------------------------------
                          * Questionable fields
-                         */
+                         ---------------------------------------------------------------*/
                         if (string.IsNullOrWhiteSpace(parts[1]))
                         {
                             validateBad += 1;
@@ -272,7 +282,7 @@ namespace WindowsFormsApp1.Classes
                         }
 
                         // NICI code must be 909 or greater
-                        if (nCode < 909)
+                        if (ucrNcicCode < 909)
                         {
                             validateBad += 1;
                         }
@@ -283,13 +293,13 @@ namespace WindowsFormsApp1.Classes
                             validRows.Add(new DataItem()
                             {
                                 Id = index,
-                                Date = d,
+                                Date = cdatetime,
                                 Address = parts[1],
                                 District = district,
                                 Beat = parts[3],
                                 Grid = grid,
                                 Description = parts[5],
-                                NcicCode = nCode,
+                                NcicCode = ucrNcicCode,
                                 Latitude = latitude,
                                 Longitude = longitude,
                                 Inspect = validateBad > 0
@@ -299,7 +309,11 @@ namespace WindowsFormsApp1.Classes
                         else
                         {
                             // fields to review in specific rows
-                            invalidRows.Add(new DataItemInvalid() { Row = index, Line = string.Join(",", parts) });
+                            invalidRows.Add(new DataItemInvalid()
+                            {
+                                Row = index, 
+                                Line = string.Join(",", parts)
+                            });
                         }
 
                     }

@@ -19,7 +19,7 @@ namespace WindowsFormsApp1
 {
     public partial class MainForm : Form
     {
-        private BindingSource _bsValidData = new BindingSource();
+        private readonly BindingSource _bsValidData = new BindingSource();
         public MainForm()
         {
             InitializeComponent();
@@ -40,9 +40,9 @@ namespace WindowsFormsApp1
             //dataGridView1.DataSource = ops.LoadCsvFileOleDb();
             //return;
 
-            (bool sucess, List<DataItem> validRows, List<DataItemInvalid> invalidRows, _ ) = ops.LoadCsvFileTextFieldParser();
+            var (success, validRows, invalidRows, _) = ops.LoadCsvFileTextFieldParser();
 
-            if (!sucess)
+            if (!success)
             {
                 MessageBox.Show(ops.LastExceptionMessage);
                 return;
@@ -58,7 +58,8 @@ namespace WindowsFormsApp1
             dataGridView1.Columns["Description"].Width = 215;
             dataGridView1.Columns["line"].Visible = false;
 
-            cboInspectRowIndices.DataSource = validRows.Where(item => item.Inspect).Select(item => item.Id).ToList();
+            cboInspectRowIndices.DataSource = 
+                validRows.Where(item => item.Inspect).Select(item => item.Id).ToList();
 
             dataGridView2.DataSource = invalidRows;
 
@@ -87,7 +88,7 @@ namespace WindowsFormsApp1
         /// <summary>
         /// Display rows marked for inspection and allow edits on Beat field. This has been 
         /// kept to one field to allow for easy learning as the basics are there e.g. casting
-        /// of items, setting the inpect field to false which signified changes are to be
+        /// of items setting the inspect field to false which signified changes are to be
         /// reflected in the DataGridView so that later these records may be pushed to the
         /// database (part 2 of this series).
         /// </summary>
@@ -97,7 +98,8 @@ namespace WindowsFormsApp1
         {
             if (_bsValidData.DataSource == null) return;     
             
-            var results = ((List<DataItem>) _bsValidData.DataSource).Where(item => item.Inspect).ToList();
+            var results = 
+                ((List<DataItem>) _bsValidData.DataSource).Where(item => item.Inspect).ToList();
 
             var f = new ReviewForm(results);
 
