@@ -21,5 +21,5 @@ This [article](https://social.technet.microsoft.com/wiki/contents/articles/53436
 
 What should be considered when parsing delimited files that the unexpected should always be considered, never think too much assertion has been performed.
 
-:large_orange_diamond: [Source code](https://github.com/karenpayneoregon/ImportingCsvFiles1/blob/master/Example1Library/Classes/FileOperations.cs) is similar to this repo with severa improvements.
+:large_orange_diamond: [Source code](https://github.com/karenpayneoregon/ImportingCsvFiles1/blob/master/Example1Library/Classes/FileOperations.cs) is similar to `this repo` with several improvements.
 
