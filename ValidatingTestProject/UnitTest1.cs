@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Device.Location;
 using System.Diagnostics;
 using System.IO;
 using Microsoft.VisualBasic.FileIO;
@@ -202,8 +203,46 @@ namespace ValidatingTestProject
 
         }
 
+        [TestMethod]
+        [TestTraits(GeoLocation)]
+        public void GeoCoordinateTest()
+        {
 
+            double latitude = 44.939018;
+            double longitude = -123.039307;
+            if (GeoExtensions.IsValidAddress(latitude,longitude))
+            {
+                Console.WriteLine("Valid");
+            }
+            else
+            {
+                Console.WriteLine("Not valid");
+            }
+        }
+    }
 
-
+    /// <summary>
+    /// TODO Transplant
+    /// </summary>
+    public static class GeoExtensions
+    {
+        /// <summary>
+        /// Validate lat/long
+        /// </summary>
+        /// <param name="latitude"></param>
+        /// <param name="longitude"></param>
+        /// <returns>true is valid, false if invalid</returns>
+        public static bool IsValidAddress(double latitude, double longitude)
+        {
+            try
+            {
+                GeoCoordinate geo = new GeoCoordinate(latitude, longitude);
+                return !geo.IsUnknown;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }
