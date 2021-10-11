@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,8 @@ namespace ValidatingTestProject
 {
     public partial class UnitTest1
     {
+        private readonly string _inputFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SacramentocrimeJanuary2006.csv");
+
         [TestInitialize]
         public void Initialization()
         {

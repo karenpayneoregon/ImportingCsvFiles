@@ -8,6 +8,7 @@ namespace ValidatingTestProject.Base
     public enum Trait
     {
         PlaceHolder,
+        FileOperation
 
     }
     /// <summary>

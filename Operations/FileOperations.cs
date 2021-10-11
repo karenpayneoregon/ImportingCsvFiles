@@ -8,18 +8,12 @@ using Microsoft.VisualBasic.FileIO;
 
 namespace Operations
 {
-    /// <summary>
-    /// Presents several methods to parse a .csv file with no external libraries
-    /// There are external libraries such as https://joshclose.github.io/CsvHelper/ which
-    /// is not covered here as the intent is for work solely with Microsoft classes.
-    /// </summary>
     public class FileOperations : BaseExceptionProperties
     {
         /*
          *This would normally be passed in from using a pre-defined list in a ListBox/ComboBox or from OpenDialog.
          */
-        private readonly string _inputFileName = 
-            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SacramentocrimeJanuary2006.csv");
+        private readonly string _inputFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SacramentocrimeJanuary2006.csv");
 
         /// <summary>
         /// Load file via OleDb
