@@ -7,13 +7,13 @@ namespace BaseLibrary
     {
         protected bool mHasException;
         /// <summary>
-        /// Indicate the last operation thrown an 
-        /// exception or not.
+        /// Indicate the last operation thrown an exception or not.
         /// </summary>
         /// <returns></returns>
         public bool HasException => mHasException;
 
         protected Exception mLastException;
+
         /// <summary>
         /// Provides access to the last exception thrown
         /// </summary>

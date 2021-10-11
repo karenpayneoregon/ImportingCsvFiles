@@ -30,13 +30,5 @@ namespace BaseLibrary
         /// </summary>
         public static string SolutionFolder() 
             => AppDomain.CurrentDomain.BaseDirectory.UpperFolder(4);
-
-        public static string DatFileName 
-            => Path.Combine(SolutionFolder(), 
-                "SearchEngine\\Objects\\Publication\\settings.dat");
-
-        public static bool DataFileExists 
-            => File.Exists(DatFileName);
     }
-
 }

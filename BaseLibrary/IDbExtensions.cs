@@ -14,7 +14,7 @@ namespace BaseLibrary // change to your namespace
     }
     /// <summary>
     /// This extension is good for viewing a SQL statement (SELECT, DELETE, UPDATE, INSERT) that
-    /// use managed data provider parameters to actuall see values that will be passed to the
+    /// use managed data provider parameters to actual see values that will be passed to the
     /// database. Has been tested with SQL-Server using @ as a parameter marker, Oracle with : as
     /// the parameter marker and MS-Access using @ as a parameter marker.
     /// 

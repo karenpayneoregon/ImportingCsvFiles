@@ -42,14 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseExceptionProperties.cs" />
-    <Compile Include="BaseSqlServerConnections.cs" />
     <Compile Include="DirectoryHelper.cs" />
     <Compile Include="GeoExtensions.cs" />
     <Compile Include="IDbExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="ConcreteClasses\" />
+    <Content Include="readme.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
