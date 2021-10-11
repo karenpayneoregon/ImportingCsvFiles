@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp1.Classes
+﻿namespace Operations
 {
     public class DataItemInvalid
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WindowsFormsApp1.Classes
+namespace Operations
 {
     public class DataItem
     {

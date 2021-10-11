@@ -51,9 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\DataGridViewExtensions.cs" />
-    <Compile Include="Classes\DataItem.cs" />
-    <Compile Include="Classes\DataItemInvalid.cs" />
-    <Compile Include="Classes\FileOperations.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,7 +63,6 @@
     <Compile Include="OleDbReadForm.Designer.cs">
       <DependentUpon>OleDbReadForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Operations.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReviewForm.cs">
@@ -116,8 +112,12 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BaseLibrary\BaseLibrary.csproj">
-      <Project>{4651fea0-d565-4c41-9abb-c18a47f153dd}</Project>
+      <Project>{4651FEA0-D565-4C41-9ABB-C18A47F153DD}</Project>
       <Name>BaseLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Operations\Operations.csproj">
+      <Project>{fe93afc5-68c6-4263-94e8-7873140175a8}</Project>
+      <Name>Operations</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

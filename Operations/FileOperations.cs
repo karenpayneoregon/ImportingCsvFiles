@@ -6,7 +6,7 @@ using System.IO;
 using BaseLibrary;
 using Microsoft.VisualBasic.FileIO;
 
-namespace WindowsFormsApp1.Classes
+namespace Operations
 {
     /// <summary>
     /// Presents several methods to parse a .csv file with no external libraries

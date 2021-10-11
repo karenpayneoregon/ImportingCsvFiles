@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using Operations;
 using WindowsFormsApp1.Classes;
 using WindowsFormsApp1.Properties;
 
