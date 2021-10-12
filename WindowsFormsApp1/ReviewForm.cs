@@ -50,6 +50,7 @@ namespace ValidatingFilesApplication
 
             _bindingSource.DataSource = _dataItemsList;
             dataGridView1.DataSource = _bindingSource;
+            bindingNavigator1.BindingSource = _bindingSource;
             dataGridView1.ExpandColumns();
 
             dataGridView1.EditingControlShowing += DataGridView1_EditingControlShowing;

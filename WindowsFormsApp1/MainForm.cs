@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Operations;
@@ -9,7 +10,13 @@ namespace ValidatingFilesApplication
 {
     public partial class MainForm : Form
     {
-        private readonly BindingSource _bsValidData = new BindingSource();
+        
+        private readonly BindingSource _validDataBindingSource = new BindingSource();
+
+        private readonly string _inputFileName = 
+            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SacramentocrimeJanuary2006.csv");
+
+
         public MainForm()
         {
             InitializeComponent();
@@ -25,12 +32,7 @@ namespace ValidatingFilesApplication
         private void cmdProcess_Click(object sender, EventArgs e)
         {
             var ops = new FileOperations();
-
-            // uncomment the next two lines to see how OleDb handles reading lines.
-            //dataGridView1.DataSource = ops.LoadCsvFileOleDb();
-            //return;
-
-            var (success, validRows, invalidRows, _) = ops.LoadCsvFileTextFieldParser();
+            var (success, validRows, invalidRows, _) = ops.LoadCsvFileTextFieldParser(_inputFileName);
 
             if (!success)
             {
@@ -38,22 +40,23 @@ namespace ValidatingFilesApplication
                 return;
             }
 
-            var results = validRows.Select(item => item.NcicCode);
-            _bsValidData.DataSource = validRows;
-            dataGridView1.DataSource = _bsValidData;
+            IEnumerable<int> niciCodes = validRows.Select(item => item.NcicCode);
 
-            dataGridView1.Columns["id"].HeaderText = "Row index";
-            dataGridView1.Columns["inspect"].DisplayIndex = 0;
-            dataGridView1.Columns["Address"].Width = 300;
-            dataGridView1.Columns["Description"].Width = 215;
-            dataGridView1.Columns["line"].Visible = false;
+            _validDataBindingSource.DataSource = validRows;
+            dataGridViewMain.DataSource = _validDataBindingSource;
 
-            cboInspectRowIndices.DataSource = 
-                validRows.Where(item => item.Inspect).Select(item => item.Id).ToList();
+            #region configure DataGridView columns
+            dataGridViewMain.Columns["id"].HeaderText = "Row index";
+            dataGridViewMain.Columns["inspect"].DisplayIndex = 0;
+            dataGridViewMain.Columns["Address"].Width = 300;
+            dataGridViewMain.Columns["Description"].Width = 215;
+            dataGridViewMain.Columns["line"].Visible = false;
+            #endregion
 
-            dataGridView2.DataSource = invalidRows;
+            cboInspectRowIndices.DataSource = validRows.Where(item => item.Inspect).Select(item => item.Id).ToList();
 
-            dataGridView2.ExpandColumns();
+            dataGridViewInvalid.DataSource = invalidRows;
+            dataGridViewInvalid.ExpandColumns();
 
         }
         /// <summary>
@@ -65,14 +68,13 @@ namespace ValidatingFilesApplication
         {
             if (cboInspectRowIndices.DataSource == null) return;
 
-            var item = _bsValidData.List.OfType<DataItem>()
-                .ToList()
+            var item = _validDataBindingSource.List.OfType<DataItem>().ToList()
                 .Find(dataItem => dataItem.Id == Convert.ToInt32(cboInspectRowIndices.Text));
 
-            var pos = _bsValidData.IndexOf(item);
+            var pos = _validDataBindingSource.IndexOf(item);
             if (pos > -1)
             {
-                _bsValidData.Position = pos;
+                _validDataBindingSource.Position = pos;
             }
         }
         /// <summary>
@@ -86,10 +88,9 @@ namespace ValidatingFilesApplication
         /// <param name="e"></param>
         private void cmdReview_Click(object sender, EventArgs e)
         {
-            if (_bsValidData.DataSource == null) return;     
+            if (_validDataBindingSource.DataSource == null) return;     
             
-            var results = 
-                ((List<DataItem>) _bsValidData.DataSource).Where(item => item.Inspect).ToList();
+            var results = ((List<DataItem>) _validDataBindingSource.DataSource).Where(item => item.Inspect).ToList();
 
             var f = new ReviewForm(results);
             
@@ -107,13 +108,13 @@ namespace ValidatingFilesApplication
                     // update rows in DataGridView
                     foreach (var dataItem in changedData)
                     {
-                        var Item = _bsValidData.List.OfType<DataItem>().ToList() .Find(item => item.Id == dataItem.Id);
+                        var Item = _validDataBindingSource.List.OfType<DataItem>().ToList() .Find(item => item.Id == dataItem.Id);
                         Item.Inspect = false;
                         Item.Beat = dataItem.Beat;
                     }
 
                     // update ComboBox to excluded updated rows from review form.
-                    results = ((List<DataItem>)_bsValidData.DataSource).Where(item => item.Inspect).ToList();
+                    results = ((List<DataItem>)_validDataBindingSource.DataSource).Where(item => item.Inspect).ToList();
                     cboInspectRowIndices.DataSource = results;
 
                 }
@@ -127,10 +128,10 @@ namespace ValidatingFilesApplication
 
         private void ItemPositionChange(DataItem current)
         {
-            var position = _bsValidData.IndexOf(current);
+            var position = _validDataBindingSource.IndexOf(current);
             if (position > -1)
             {
-                _bsValidData.Position = position;
+                _validDataBindingSource.Position = position;
             }
         }
 
@@ -143,7 +144,7 @@ namespace ValidatingFilesApplication
         {
             var operations = new FileOperations();
 
-            var (table, exceptions) = operations.LoadCsvFileOleDb();
+            var (table, exceptions) = operations.LoadCsvFileOleDb(_inputFileName);
 
             if (exceptions != null)
             {
@@ -160,6 +161,29 @@ namespace ValidatingFilesApplication
             {
                 f.Dispose();
             }
+        }
+
+        /// <summary>
+        /// Has no true use other than showing how to get to the checked rows
+        /// which should never be touched.
+        ///
+        /// We can access each row into <see cref="_validDataBindingSource"/> by it's index
+        /// of the DataGridViewRow.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void InspectButton_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewMain.DataSource != null)
+            {
+                List<DataGridViewRow> items = dataGridViewMain.GetCheckedRows("Inspect");
+                MessageBox.Show($"There are {items.Count} checked currently");
+            }
+            else
+            {
+                MessageBox.Show("No data source");
+            }
+
         }
     }
 }

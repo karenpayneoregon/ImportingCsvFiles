@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -50,5 +52,7 @@ namespace ValidatingFilesApplication.Classes
             }
             return result;
         }
+        public static List<DataGridViewRow> GetCheckedRows(this DataGridView sender, string columnName) 
+            => sender.Rows.Cast<DataGridViewRow>().Where(row => !row.IsNewRow && Convert.ToBoolean(row.Cells[columnName].Value)).ToList();
     }
 }

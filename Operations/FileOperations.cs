@@ -19,7 +19,7 @@ namespace Operations
         /*
          *This would normally be passed in from using a pre-defined list in a ListBox/ComboBox or from OpenDialog.
          */
-        private readonly string _inputFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SacramentocrimeJanuary2006.csv");
+        //private readonly string _inputFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SacramentocrimeJanuary2006.csv");
 
         private List<int> _districtValidItems = new List<int>() { 1, 2, 3, 4, 5, 6 };
 
@@ -30,11 +30,11 @@ namespace Operations
         /// This method is fine if each column data is the correct type,
         /// if not then a manual parse (as shown with StreamReader and TextFieldParser are better chooses)
         /// </remarks>
-        public (DataTable table, Exception exception) LoadCsvFileOleDb()
+        public (DataTable table, Exception exception) LoadCsvFileOleDb(string inputFileName)
         {
             var connectionString = 
                 $@"Provider=Microsoft.Jet.OleDb.4.0; " + 
-                $"Data Source={Path.GetDirectoryName(_inputFileName)};Extended Properties=\"Text;HDR=YES;FMT=Delimited\"";
+                $"Data Source={Path.GetDirectoryName(inputFileName)};Extended Properties=\"Text;HDR=YES;FMT=Delimited\"";
 
             var table = new DataTable();
 
@@ -44,14 +44,14 @@ namespace Operations
                 {
                     cn.Open();
 
-                    var selectStatement = "SELECT * FROM [" + Path.GetFileName(_inputFileName) + "]";
+                    var selectStatement = "SELECT * FROM [" + Path.GetFileName(inputFileName) + "]";
 
                     using (var adapter = new OleDbDataAdapter(selectStatement, cn))
                     {
                         var ds = new DataSet("Demo");
                         var recordCount = adapter.Fill(ds);
 
-                        ds.Tables[0].TableName = Path.GetFileNameWithoutExtension(_inputFileName);
+                        ds.Tables[0].TableName = Path.GetFileNameWithoutExtension(inputFileName);
                         table = ds.Tables[0];
 
                     }
@@ -68,14 +68,14 @@ namespace Operations
         /// <summary>
         /// Load file via StreamReader
         /// </summary>
-        /// <param name="filePath"></param>
+        /// <param name="inputFileName"></param>
         /// <returns></returns>
-        public (bool Success, List<DataItem>, List<DataItemInvalid>) LoadCsvFileStreamReader(string filePath = "")
+        public (bool Success, List<DataItem>, List<DataItemInvalid>) LoadCsvFileStreamReader(string inputFileName)
         {
-            if (!File.Exists(_inputFileName))
+            if (!File.Exists(inputFileName))
             {
                 mHasException = true;
-                mLastException = new FileNotFoundException($"Missing {_inputFileName}");
+                mLastException = new FileNotFoundException($"Missing {inputFileName}");
 
                 return (mHasException, new List<DataItem>(),new List<DataItemInvalid>() );
             }
@@ -99,7 +99,7 @@ namespace Operations
 
             try
             {
-                using (var readFile = new StreamReader(_inputFileName))
+                using (var readFile = new StreamReader(inputFileName))
                 {
                     string line;
                     string[] parts;
@@ -194,7 +194,7 @@ namespace Operations
         /// Load file via VB TextFieldParser
         /// </summary>
         /// <returns></returns>
-        public (bool Success, List<DataItem>, List<DataItemInvalid>, int EmptyLineCount) LoadCsvFileTextFieldParser()
+        public (bool Success, List<DataItem>, List<DataItemInvalid>, int EmptyLineCount) LoadCsvFileTextFieldParser(string pInputFileName)
         {
             mHasException = false;
 
@@ -221,7 +221,7 @@ namespace Operations
                 /*
                  * If interested in blank line count
                  */
-                using (var reader = File.OpenText(_inputFileName))
+                using (var reader = File.OpenText(pInputFileName))
                 {
                     while ((line = reader.ReadLine()) != null) // EOF
                     {
@@ -232,7 +232,7 @@ namespace Operations
                     }
                 }
 
-                using (var parser = new TextFieldParser(_inputFileName))
+                using (var parser = new TextFieldParser(pInputFileName))
                 {
                     
                     parser.Delimiters = new[] { "," };

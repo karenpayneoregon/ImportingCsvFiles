@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.cmdProcess = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewMain = new System.Windows.Forms.DataGridView();
             this.cmdInspectRows = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.OleDbLoadButton = new System.Windows.Forms.Button();
@@ -38,14 +38,15 @@
             this.cmdExit = new System.Windows.Forms.Button();
             this.cboInspectRowIndices = new System.Windows.Forms.ComboBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.dataGridViewInvalid = new System.Windows.Forms.DataGridView();
+            this.InspectButton = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMain)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInvalid)).BeginInit();
             this.SuspendLayout();
             // 
             // cmdProcess
@@ -58,15 +59,15 @@
             this.cmdProcess.UseVisualStyleBackColor = true;
             this.cmdProcess.Click += new System.EventHandler(this.cmdProcess_Click);
             // 
-            // dataGridView1
+            // dataGridViewMain
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(755, 263);
-            this.dataGridView1.TabIndex = 1;
+            this.dataGridViewMain.AllowUserToAddRows = false;
+            this.dataGridViewMain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewMain.Location = new System.Drawing.Point(0, 0);
+            this.dataGridViewMain.Name = "dataGridViewMain";
+            this.dataGridViewMain.Size = new System.Drawing.Size(755, 263);
+            this.dataGridViewMain.TabIndex = 1;
             // 
             // cmdInspectRows
             // 
@@ -80,6 +81,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.InspectButton);
             this.panel1.Controls.Add(this.OleDbLoadButton);
             this.panel1.Controls.Add(this.cmdReview);
             this.panel1.Controls.Add(this.cmdExit);
@@ -94,7 +96,8 @@
             // 
             // OleDbLoadButton
             // 
-            this.OleDbLoadButton.Location = new System.Drawing.Point(426, 24);
+            this.OleDbLoadButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.OleDbLoadButton.Location = new System.Drawing.Point(548, 24);
             this.OleDbLoadButton.Name = "OleDbLoadButton";
             this.OleDbLoadButton.Size = new System.Drawing.Size(75, 23);
             this.OleDbLoadButton.TabIndex = 6;
@@ -141,24 +144,34 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.dataGridView1);
+            this.splitContainer1.Panel1.Controls.Add(this.dataGridViewMain);
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.dataGridView2);
+            this.splitContainer1.Panel2.Controls.Add(this.dataGridViewInvalid);
             this.splitContainer1.Size = new System.Drawing.Size(755, 408);
             this.splitContainer1.SplitterDistance = 263;
             this.splitContainer1.TabIndex = 4;
             // 
-            // dataGridView2
+            // dataGridViewInvalid
             // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView2.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(755, 141);
-            this.dataGridView2.TabIndex = 2;
+            this.dataGridViewInvalid.AllowUserToAddRows = false;
+            this.dataGridViewInvalid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewInvalid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewInvalid.Location = new System.Drawing.Point(0, 0);
+            this.dataGridViewInvalid.Name = "dataGridViewInvalid";
+            this.dataGridViewInvalid.Size = new System.Drawing.Size(755, 141);
+            this.dataGridViewInvalid.TabIndex = 2;
+            // 
+            // InspectButton
+            // 
+            this.InspectButton.Location = new System.Drawing.Point(411, 24);
+            this.InspectButton.Name = "InspectButton";
+            this.InspectButton.Size = new System.Drawing.Size(75, 23);
+            this.InspectButton.TabIndex = 7;
+            this.InspectButton.Text = "Inspect";
+            this.InspectButton.UseVisualStyleBackColor = true;
+            this.InspectButton.Click += new System.EventHandler(this.InspectButton_Click);
             // 
             // MainForm
             // 
@@ -171,13 +184,13 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Code Sample";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMain)).EndInit();
             this.panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInvalid)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -185,15 +198,16 @@
         #endregion
 
         private System.Windows.Forms.Button cmdProcess;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewMain;
         private System.Windows.Forms.Button cmdInspectRows;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dataGridViewInvalid;
         private System.Windows.Forms.ComboBox cboInspectRowIndices;
         private System.Windows.Forms.Button cmdExit;
         private System.Windows.Forms.Button cmdReview;
         private System.Windows.Forms.Button OleDbLoadButton;
+        private System.Windows.Forms.Button InspectButton;
     }
 }
 
