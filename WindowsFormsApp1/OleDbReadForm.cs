@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WindowsFormsApp1.Classes;
+using ValidatingFilesApplication.Classes;
 
-namespace WindowsFormsApp1
+namespace ValidatingFilesApplication
 {
     public partial class OleDbReadForm : Form
     {
@@ -28,9 +23,15 @@ namespace WindowsFormsApp1
             Shown += OnShown;
         }
 
+        /// <summary>
+        /// Populate data
+        ///     DataGridView ScrollBars is set to ScrollBars.None in the designer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void OnShown(object sender, EventArgs e)
         {
-
+            // ensure button is not grey out
             await Task.Delay(1);
 
             dataGridView1.DataSource = _table;
@@ -43,6 +44,7 @@ namespace WindowsFormsApp1
             finally
             {
                 dataGridView1.ResumeLayout();
+                dataGridView1.ScrollBars = ScrollBars.Both;
             }
             
         }

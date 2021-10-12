@@ -147,4 +147,59 @@
   <metadata name="longitudeColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="idColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="dateColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="addressColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="districtColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="beatColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="gridColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="descriptionColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="nicicColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="latitudeColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="longitudeColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAMQOAADEDgAAAAAAAAAA
+        AADkgQD/5IEA/+SBAP/kgQD/5IEA/+SBAP/kgQD/5IEA/+SBAP/kgQD/5IEA/+SBAP/kgQD/5IEA/+SB
+        ABD///8A5IEA/+SBABDkgQAQ5IEAEOSBABDkgQAQ5IEAEOSBABDkgQAQ5IEAEOSBABDkgQAQ5IEAH+SB
+        AP/kgQAQ////AOSBAP/kgQAB5IEAEOSBABDkgQAQ5IEAEOSBABDkgQAQ5IEAEOSBABDkgQAQ5IEAEOSB
+        AB/kgQD/5IEAH+SBABDkgQD/5IEAEOSBAP/kgQD/5IEA/+SBAP/kgQD/5IEA/+SBAP/kgQD/5IEA/+SB
+        AP/kgQD/5IEA/+SBAP/kgQD/5IEA/+SBABDkgQD/5IEAEOSBABDkgQAQ5IEAEOSBABDkgQAQ5IEAEOSB
+        ABDkgQAQ5IEAH+SBAP/kgQAQ5IEA/+SBAP/kgQAQ5IEA/////wD///8A////AP///wD///8A////AP//
+        /wD///8A////AOSBABDkgQD/5IEAEOSBAP/kgQD/5IEAEOSBAP////8A////AOSBAP/kgQD/5IEA/+SB
+        AP/kgQD/5IEA/////wDkgQAQ5IEA/+SBABDkgQD/5IEA/+SBABDkgQD/////AP///wDkgQAQ5IEAEOSB
+        ABDkgQAQ5IEAEOSBABD///8A5IEAEOSBAP/kgQAQ5IEA/+SBAP/kgQAQ5IEA/////wD///8A////AP//
+        /wD///8A////AP///wD///8A////AOSBABDkgQD/5IEAEOSBAP/kgQD/5IEA/+SBAP/kgQD/5IEA/+SB
+        AP/kgQD/5IEA/+SBAP/kgQD/5IEA/+SBAP/kgQD/5IEA/+SBABDkgQD/5IEA/+SBAP/kgQD/5IEA/+SB
+        AP/kgQD/5IEA/+SBAP/kgQD/5IEA/+SBAP/kgQD/5IEA/+SBAP/kgQAQ5IEA/////wDkgQAQ5IEA////
+        /wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AOSBAP////8A5IEAEOSB
+        AP/kgQAQ5IEAEOSBABDkgQAQ5IEAEOSBABDkgQAQ5IEAEOSBABDkgQAQ5IEAEOSBABDkgQD/////AOSB
+        ABDkgQD/5IEA/+SBAP/kgQD/5IEA/+SBAP/kgQD/5IEA/+SBAP/kgQD/5IEA/+SBAP/kgQD/5IEA////
+        /wDkgQAQ5IEA/+SBAP/kgQD/5IEA/+SBAP/kgQD/5IEA/+SBAP/kgQD/5IEA/+SBAP/kgQD/5IEA/+SB
+        AP////8A5IEAAeSBABDkgQAQ5IEAEOSBABDkgQAQ5IEAEOSBABDkgQAQ5IEAEOSBABDkgQAQ5IEAEOSB
+        ABDkgQAQAAEAAAABAAAAAAAAAAAAAAAAAAAf8AAAGBAAABgQAAAf8AAAAAAAAAAAAACf/gAAgAAAAIAA
+        AACAAAAAgAAAAA==
+</value>
+  </data>
 </root>

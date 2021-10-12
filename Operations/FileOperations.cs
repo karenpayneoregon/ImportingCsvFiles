@@ -3,17 +3,25 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
 using System.IO;
+using System.Linq;
 using BaseLibrary;
+
+// For TextFieldParser class
 using Microsoft.VisualBasic.FileIO;
 
 namespace Operations
 {
+    /// <summary>
+    /// Sample file operations
+    /// </summary>
     public class FileOperations : BaseExceptionProperties
     {
         /*
          *This would normally be passed in from using a pre-defined list in a ListBox/ComboBox or from OpenDialog.
          */
         private readonly string _inputFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SacramentocrimeJanuary2006.csv");
+
+        private List<int> _districtValidItems = new List<int>() { 1, 2, 3, 4, 5, 6 };
 
         /// <summary>
         /// Load file via OleDb
@@ -24,7 +32,7 @@ namespace Operations
         /// </remarks>
         public (DataTable table, Exception exception) LoadCsvFileOleDb()
         {
-            var connString = 
+            var connectionString = 
                 $@"Provider=Microsoft.Jet.OleDb.4.0; " + 
                 $"Data Source={Path.GetDirectoryName(_inputFileName)};Extended Properties=\"Text;HDR=YES;FMT=Delimited\"";
 
@@ -32,7 +40,7 @@ namespace Operations
 
             try
             {
-                using (var cn = new OleDbConnection(connString))
+                using (var cn = new OleDbConnection(connectionString))
                 {
                     cn.Open();
 
@@ -41,7 +49,7 @@ namespace Operations
                     using (var adapter = new OleDbDataAdapter(selectStatement, cn))
                     {
                         var ds = new DataSet("Demo");
-                        adapter.Fill(ds);
+                        var recordCount = adapter.Fill(ds);
 
                         ds.Tables[0].TableName = Path.GetFileNameWithoutExtension(_inputFileName);
                         table = ds.Tables[0];
@@ -68,9 +76,11 @@ namespace Operations
             {
                 mHasException = true;
                 mLastException = new FileNotFoundException($"Missing {_inputFileName}");
+
                 return (mHasException, new List<DataItem>(),new List<DataItemInvalid>() );
             }
 
+            
             mHasException = false;
 
             var validRows = new List<DataItem>();
@@ -79,8 +89,10 @@ namespace Operations
 
             int index = 0;
 
+
             int district = 0;
             int grid = 0;
+            int ucrNcicCode = 0;
             int nCode = 0;
             float latitude = 0;
             float longitude = 0;
@@ -117,13 +129,8 @@ namespace Operations
                         /*
                          * These columns are checked for proper types
                          */
-                        var validRow = DateTime.TryParse(parts[0], out var d) &&
-                                       float.TryParse(parts[7].Trim(), out latitude) &&
-                                       float.TryParse(parts[8].Trim(), out longitude) &&
-                                       int.TryParse(parts[2], out district) &&
-                                       int.TryParse(parts[4], out grid) &&
-                                       !string.IsNullOrWhiteSpace(parts[5]) &&
-                                       int.TryParse(parts[6], out nCode);
+
+                        var validRow = ValidSingleRow(parts, out var cdatetime, ref latitude, ref longitude, ref district, ref grid, ref ucrNcicCode);
 
                         /*
                          * Questionable fields
@@ -149,7 +156,7 @@ namespace Operations
                             validRows.Add(new DataItem()
                             {
                                 Id = index,
-                                Date = d,
+                                Date = cdatetime,
                                 Address = parts[1],
                                 District = district,
                                 Beat = parts[3],
@@ -160,6 +167,8 @@ namespace Operations
                                 Longitude = longitude,
                                 Inspect = validateBad > 0
                             });
+
+                            
 
                         }
                         else
@@ -176,6 +185,8 @@ namespace Operations
                 mLastException = ex;
             }
 
+
+
             return (IsSuccessFul, validRows, invalidRows);
 
         }
@@ -187,8 +198,10 @@ namespace Operations
         {
             mHasException = false;
 
+
             var validRows = new List<DataItem>();
             var invalidRows = new List<DataItemInvalid>();
+            // ReSharper disable once TooWideLocalVariableScope
             var validateBad = 0;
 
             int index = 0;
@@ -200,6 +213,7 @@ namespace Operations
             float longitude = 0;
 
             var emptyLineCount = 0;
+            // ReSharper disable once TooWideLocalVariableScope
             var line = "";
 
             try
@@ -254,14 +268,7 @@ namespace Operations
                         /*
                          * These columns are checked for proper types
                          */
-                        var validRow = 
-                            DateTime.TryParse(parts[0], out var cdatetime) && 
-                            float.TryParse(parts[7].Trim(), out latitude) && 
-                            float.TryParse(parts[8].Trim(), out longitude) && 
-                            int.TryParse(parts[2], out district) && 
-                            int.TryParse(parts[4], out grid) && 
-                            !string.IsNullOrWhiteSpace(parts[5]) && 
-                            int.TryParse(parts[6], out ucrNcicCode);
+                        var validRow = ValidSingleRow(parts, out var cdatetime, ref latitude, ref longitude, ref district, ref grid, ref ucrNcicCode);
 
                         /*---------------------------------------------------------------
                          * Questionable fields
@@ -299,6 +306,7 @@ namespace Operations
                                 Inspect = validateBad > 0
                             });
 
+
                         }
                         else
                         {
@@ -320,9 +328,30 @@ namespace Operations
                 mLastException = ex;
             }
 
+
             return (IsSuccessFul, validRows, invalidRows,emptyLineCount);
 
         }
 
+        private static bool ValidSingleRow(
+            string[] parts, 
+            out DateTime cdatetime, 
+            ref float latitude, 
+            ref float longitude, 
+            ref int district, 
+            ref int grid, 
+            ref int ucrNcicCode)
+        {
+            bool validRow =
+                DateTime.TryParse(parts[0], out cdatetime) &&
+                float.TryParse(parts[7].Trim(), out latitude) &&
+                float.TryParse(parts[8].Trim(), out longitude) &&
+                int.TryParse(parts[2], out district) &&
+                int.TryParse(parts[4], out grid) &&
+                !string.IsNullOrWhiteSpace(parts[5]) &&
+                int.TryParse(parts[6], out ucrNcicCode);
+
+            return validRow;
+        }
     }
 }

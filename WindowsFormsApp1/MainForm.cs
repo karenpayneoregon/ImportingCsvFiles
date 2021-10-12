@@ -1,22 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 using Operations;
-using WindowsFormsApp1.Classes;
-using WindowsFormsApp1.Properties;
+using ValidatingFilesApplication.Classes;
 
-
-namespace WindowsFormsApp1
+namespace ValidatingFilesApplication
 {
     public partial class MainForm : Form
     {
@@ -103,6 +92,8 @@ namespace WindowsFormsApp1
                 ((List<DataItem>) _bsValidData.DataSource).Where(item => item.Inspect).ToList();
 
             var f = new ReviewForm(results);
+            
+            f.PositionChange += ItemPositionChange;
 
             try
             {               
@@ -129,9 +120,20 @@ namespace WindowsFormsApp1
             }
             finally
             {
+                f.PositionChange -= ItemPositionChange;
                 f.Dispose();
             }
         }
+
+        private void ItemPositionChange(DataItem current)
+        {
+            var position = _bsValidData.IndexOf(current);
+            if (position > -1)
+            {
+                _bsValidData.Position = position;
+            }
+        }
+
         private void cmdExit_Click(object sender, EventArgs e)
         {
             Close();

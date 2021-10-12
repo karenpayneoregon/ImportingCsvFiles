@@ -1,6 +1,6 @@
 # About 
 
-For TechNet article [C#: Processing CSV files](https://social.technet.microsoft.com/wiki/contents/articles/52030.c-processing-csv-files-part-1.aspx) 
+**TechNet article** [C#: Processing CSV files](https://social.technet.microsoft.com/wiki/contents/articles/52030.c-processing-csv-files-part-1.aspx) 
 
 This series will explore various aspects for importing a CSV file with comma-separated-values (.csv) into a SQL-Server database.  CSV files are a common way to share data in plain text format from sources such as a database table(s) to another database e.g. from SQL-Server to an Oracle database. 
 

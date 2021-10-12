@@ -1,29 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Operations;
-using WindowsFormsApp1.Classes;
+using ValidatingFilesApplication.Classes;
 
-namespace WindowsFormsApp1
+namespace ValidatingFilesApplication
 {
     public partial class ReviewForm : Form
     {
-        private BindingSource _bs = new BindingSource();
-        private List<DataItem> _data;
+        public delegate void OnPositionChange(DataItem sender);
+        public event OnPositionChange PositionChange;
+
+        private readonly BindingSource _bindingSource = new BindingSource();
+        private List<DataItem> _dataItemsList;
 
         /// <summary>
         /// Provide access by the calling form to the data presented
         /// </summary>
-        public List<DataItem> Data  
-        {
-            get { return _data; }
-        }
+        public List<DataItem> Data => _dataItemsList;
 
         /// <summary>
         /// Acceptable values for beat field. In part 2 these will be read from a database reference table.
@@ -39,11 +33,11 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
-        public ReviewForm(List<DataItem> pData)
+        public ReviewForm(List<DataItem> dataItemsList)
         {
             InitializeComponent();
 
-            _data = pData;
+            _dataItemsList = dataItemsList;
             Shown += ReviewForm_Shown;
         }
 
@@ -54,13 +48,21 @@ namespace WindowsFormsApp1
             // ReSharper disable once PossibleNullReferenceException
             ((DataGridViewComboBoxColumn) dataGridView1.Columns["beatColumn"]).DataSource = _beatList;
 
-            _bs.DataSource = _data;
-            dataGridView1.DataSource = _bs;
+            _bindingSource.DataSource = _dataItemsList;
+            dataGridView1.DataSource = _bindingSource;
             dataGridView1.ExpandColumns();
 
             dataGridView1.EditingControlShowing += DataGridView1_EditingControlShowing;
 
+            _bindingSource.PositionChanged += BindingSourceOnPositionChanged;
+
         }
+
+        private void BindingSourceOnPositionChanged(object sender, EventArgs e)
+        {
+            PositionChange?.Invoke((DataItem)_bindingSource.Current);
+        }
+
         /// <summary>
         /// Setup to provide access to changes to the current row, here we are only interested in the beat field.
         /// Other fields would use similar logic for providing valid selections.
@@ -80,7 +82,6 @@ namespace WindowsFormsApp1
                     }
                 }
             }
-
         }
         /// <summary>
         /// Update current row beat field
@@ -89,11 +90,11 @@ namespace WindowsFormsApp1
         /// <param name="e"></param>
         private void _SelectionChangeCommitted(object sender, EventArgs e)
         {
-            if (_bs.Current !=null)
+            if (_bindingSource.Current !=null)
             {
                 if (!string.IsNullOrWhiteSpace(((DataGridViewComboBoxEditingControl)sender).Text))
                 {
-                    var currentRow = (DataItem) _bs.Current;
+                    var currentRow = (DataItem) _bindingSource.Current;
                     currentRow.Beat = ((DataGridViewComboBoxEditingControl) sender).Text;
                     currentRow.Inspect = false;
                 }

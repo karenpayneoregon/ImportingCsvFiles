@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace BaseLibrary
 {
+    /// <summary>
+    /// Provides access to exceptions in an operation
+    /// </summary>
     public class BaseExceptionProperties
     {
         protected bool mHasException;

@@ -1,4 +1,5 @@
 ﻿using System;
+using BaseLibrary;
 
 namespace Operations
 {
@@ -15,11 +16,17 @@ namespace Operations
         public float Latitude { get; set; }
         public float Longitude { get; set; }
         public bool Inspect { get; set; }
-        public string Line => $"{Id},{Date},{Address},{District},{Beat}," + 
-                              $"{Grid},{Description},{NcicCode},{Latitude},{Longitude}";
-        public override string ToString()
-        {
-            return Id.ToString();
-        }
+
+        /// <summary>
+        /// Validate both Latitude and Longitude are in acceptable range
+        /// </summary>
+        /// <returns></returns>
+        public bool IsValidLatLong() => Latitude.IsLatitude() && Longitude.IsLongitude();
+
+        public string Line => 
+            $"{Id},{Date},{Address},{District},{Beat}," + 
+            $"{Grid},{Description},{NcicCode},{Latitude},{Longitude}";
+
+        public override string ToString() => Id.ToString();
     }
 }

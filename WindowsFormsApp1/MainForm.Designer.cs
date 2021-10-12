@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp1
+﻿namespace ValidatingFilesApplication
 {
     partial class MainForm
     {
@@ -28,16 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.cmdProcess = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.cmdInspectRows = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.OleDbLoadButton = new System.Windows.Forms.Button();
             this.cmdReview = new System.Windows.Forms.Button();
             this.cmdExit = new System.Windows.Forms.Button();
             this.cboInspectRowIndices = new System.Windows.Forms.ComboBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.OleDbLoadButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -90,6 +91,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(755, 59);
             this.panel1.TabIndex = 3;
+            // 
+            // OleDbLoadButton
+            // 
+            this.OleDbLoadButton.Location = new System.Drawing.Point(426, 24);
+            this.OleDbLoadButton.Name = "OleDbLoadButton";
+            this.OleDbLoadButton.Size = new System.Drawing.Size(75, 23);
+            this.OleDbLoadButton.TabIndex = 6;
+            this.OleDbLoadButton.Text = "OleDb load";
+            this.OleDbLoadButton.UseVisualStyleBackColor = true;
+            this.OleDbLoadButton.Click += new System.EventHandler(this.OleDbLoadButton_Click);
             // 
             // cmdReview
             // 
@@ -149,16 +160,6 @@
             this.dataGridView2.Size = new System.Drawing.Size(755, 141);
             this.dataGridView2.TabIndex = 2;
             // 
-            // OleDbLoadButton
-            // 
-            this.OleDbLoadButton.Location = new System.Drawing.Point(426, 24);
-            this.OleDbLoadButton.Name = "OleDbLoadButton";
-            this.OleDbLoadButton.Size = new System.Drawing.Size(75, 23);
-            this.OleDbLoadButton.TabIndex = 6;
-            this.OleDbLoadButton.Text = "OleDb load";
-            this.OleDbLoadButton.UseVisualStyleBackColor = true;
-            this.OleDbLoadButton.Click += new System.EventHandler(this.OleDbLoadButton_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -166,6 +167,7 @@
             this.ClientSize = new System.Drawing.Size(755, 467);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Code Sample";
