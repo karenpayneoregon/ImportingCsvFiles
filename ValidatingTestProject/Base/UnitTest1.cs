@@ -12,6 +12,7 @@ namespace ValidatingTestProject
     public partial class UnitTest1
     {
         private readonly string _inputFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SacramentocrimeJanuary2006.csv");
+        private readonly string _inputFileNameSmall = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SacramentocrimeJanuary2006_1.csv");
 
         [TestInitialize]
         public void Initialization()

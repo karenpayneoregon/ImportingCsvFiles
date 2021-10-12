@@ -14,6 +14,9 @@ namespace ValidatingTestProject
     [TestClass]
     public partial class UnitTest1 : TestBase
     {
+        /// <summary>
+        /// Test empty lines can be located
+        /// </summary>
         [TestMethod]
         [TestTraits(FileOperation)]
         public void EmptyLineCountTest()
@@ -41,6 +44,10 @@ namespace ValidatingTestProject
 
         }
 
+        /// <summary>
+        /// Test against a file with invalid data while <see cref="FieldCountTest_Small"/>
+        /// is a smaller file with no issues.
+        /// </summary>
         [TestMethod]
         [TestTraits(FileOperation)]
         public void FieldCountTest()
@@ -91,6 +98,54 @@ namespace ValidatingTestProject
         }
 
         /// <summary>
+        /// Test against perfect file which is smaller than in <see cref="FieldCountTest"/>
+        /// </summary>
+        [TestMethod] 
+        [TestTraits(FileOperation)]
+        public void FieldCountTest_Small()
+        {
+            var invalidRows = new List<DataItemInvalid>();
+            var index = 1;
+            var validateBad = 0;
+
+
+            using (var parser = new TextFieldParser(_inputFileNameSmall))
+            {
+                parser.Delimiters = new[] { "," };
+
+                while (true)
+                {
+                    string[] parts = parser.ReadFields();
+
+                    if (parts == null)
+                    {
+                        break;
+                    }
+
+                    index += 1;
+
+                    if (parts.Length != 9)
+                    {
+
+                        invalidRows.Add(new DataItemInvalid()
+                        {
+                            Row = index,
+                            Line = string.Join(",", parts)
+                        });
+
+                        continue;
+
+                    }
+
+                    if (index <= 1) continue;
+                }
+
+            }
+
+            Assert.AreEqual(invalidRows.Count,0);
+
+        }
+        /// <summary>
         /// Validate fields
         /// We could break this down for each validation/assertion
         /// </summary>
@@ -125,7 +180,6 @@ namespace ValidatingTestProject
                     }
 
                     index += 1;
-
 
 
                     if (index <= 1) continue;
@@ -203,6 +257,11 @@ namespace ValidatingTestProject
 
         }
 
+        /// <summary>
+        /// Used to validate <see cref="GeoExtensions.IsValidAddress"/>
+        /// This test is not for working against thousands of items as the
+        /// underlying code is slow.
+        /// </summary>
         [TestMethod]
         [TestTraits(GeoLocation)]
         public void GeoCoordinateTest()

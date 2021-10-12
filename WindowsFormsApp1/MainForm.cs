@@ -165,10 +165,11 @@ namespace ValidatingFilesApplication
 
         /// <summary>
         /// Has no true use other than showing how to get to the checked rows
-        /// which should never be touched.
+        /// which should never be touched, instead always access via the underlying data source
         ///
         /// We can access each row into <see cref="_validDataBindingSource"/> by it's index
         /// of the DataGridViewRow.
+        /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

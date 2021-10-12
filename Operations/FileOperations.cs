@@ -16,10 +16,6 @@ namespace Operations
     /// </summary>
     public class FileOperations : BaseExceptionProperties
     {
-        /*
-         *This would normally be passed in from using a pre-defined list in a ListBox/ComboBox or from OpenDialog.
-         */
-        //private readonly string _inputFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SacramentocrimeJanuary2006.csv");
 
         private List<int> _districtValidItems = new List<int>() { 1, 2, 3, 4, 5, 6 };
 
