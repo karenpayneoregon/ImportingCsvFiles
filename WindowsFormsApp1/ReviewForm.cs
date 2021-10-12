@@ -73,7 +73,8 @@ namespace ValidatingFilesApplication
         {
             if (dataGridView1.CurrentCell.IsComboBoxCell())
             {
-                if (dataGridView1.Columns[dataGridView1.CurrentCell.ColumnIndex].Name == "beatColumn")
+                
+                if (dataGridView1.Columns[dataGridView1.CurrentCell.ColumnIndex].Name == nameof(beatColumn))
                 {
                     if (e.Control is ComboBox cb)
                     {
