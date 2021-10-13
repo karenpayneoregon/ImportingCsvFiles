@@ -45,7 +45,7 @@ namespace Operations
                     using (var adapter = new OleDbDataAdapter(selectStatement, cn))
                     {
                         var ds = new DataSet("Demo");
-                        var recordCount = adapter.Fill(ds);
+                        var recordCount = adapter.Fill(ds); 
 
                         ds.Tables[0].TableName = Path.GetFileNameWithoutExtension(inputFileName);
                         table = ds.Tables[0];
@@ -53,9 +53,9 @@ namespace Operations
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception exceptionLocal)
             {
-                return (null, ex);
+                return (null, exceptionLocal);
             }
 
             return (table, null);
@@ -175,10 +175,10 @@ namespace Operations
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception exceptionLocal)
             {
                 mHasException = true;
-                mLastException = ex;
+                mLastException = exceptionLocal;
             }
 
 
@@ -318,10 +318,10 @@ namespace Operations
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception exceptionLocal)
             {
                 mHasException = true;
-                mLastException = ex;
+                mLastException = exceptionLocal;
             }
 
 
@@ -330,7 +330,7 @@ namespace Operations
         }
 
         private static bool ValidSingleRow(
-            string[] parts, 
+            IReadOnlyList<string> parts, 
             out DateTime cdatetime, 
             ref float latitude, 
             ref float longitude, 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using Operations;
 using ValidatingFilesApplication.Classes;
@@ -28,16 +29,19 @@ namespace ValidatingFilesApplication
                 "4B", "4C", "5A", "5B", "5C", "6A", "6B", "6C"
             } ;
 
+        private readonly DataItem _currentItem;
+
         public ReviewForm()
         {
             InitializeComponent();
         }
 
-        public ReviewForm(List<DataItem> dataItemsList)
+        public ReviewForm(List<DataItem> dataItemsList, DataItem currentItem)
         {
             InitializeComponent();
 
             _dataItemsList = dataItemsList;
+            _currentItem = currentItem;
             Shown += ReviewForm_Shown;
         }
 
@@ -46,12 +50,30 @@ namespace ValidatingFilesApplication
             dataGridView1.AutoGenerateColumns = false;
 
             // ReSharper disable once PossibleNullReferenceException
-            ((DataGridViewComboBoxColumn) dataGridView1.Columns["beatColumn"]).DataSource = _beatList;
+            ((DataGridViewComboBoxColumn) dataGridView1.Columns[nameof(beatColumn)]).DataSource = _beatList;
 
             _bindingSource.DataSource = _dataItemsList;
             dataGridView1.DataSource = _bindingSource;
             bindingNavigator1.BindingSource = _bindingSource;
             dataGridView1.ExpandColumns();
+
+            if (_currentItem.Inspect)
+            {
+                DataItem Item = _bindingSource.List.OfType<DataItem>().ToList().Find(item => item.Id == _currentItem.Id);
+
+                foreach (DataItem dataItem in _bindingSource)
+                {
+                    if (dataItem.Id == _currentItem.Id)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        _bindingSource.MoveNext();
+                    }
+                }
+                
+            }
 
             dataGridView1.EditingControlShowing += DataGridView1_EditingControlShowing;
 

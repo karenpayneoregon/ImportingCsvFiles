@@ -44,6 +44,7 @@ namespace ValidatingFilesApplication
 
             _validDataBindingSource.DataSource = validRows;
             dataGridViewMain.DataSource = _validDataBindingSource;
+            bindingNavigator1.BindingSource = _validDataBindingSource;
 
             #region configure DataGridView columns
             dataGridViewMain.Columns["id"].HeaderText = "Row index";
@@ -64,7 +65,7 @@ namespace ValidatingFilesApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cmdInspectRows_Click(object sender, EventArgs e)
+        private void cmdInspectRow_Click(object sender, EventArgs e)
         {
             if (cboInspectRowIndices.DataSource == null) return;
 
@@ -91,8 +92,7 @@ namespace ValidatingFilesApplication
             if (_validDataBindingSource.DataSource == null) return;     
             
             var results = ((List<DataItem>) _validDataBindingSource.DataSource).Where(item => item.Inspect).ToList();
-
-            var f = new ReviewForm(results);
+            var f = new ReviewForm(results, (DataItem)_validDataBindingSource.Current);
             
             f.PositionChange += ItemPositionChange;
 
@@ -185,6 +185,11 @@ namespace ValidatingFilesApplication
                 MessageBox.Show("No data source");
             }
 
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This is where a help screen should appear","Help");
         }
     }
 }

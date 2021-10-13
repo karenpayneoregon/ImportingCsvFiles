@@ -12,7 +12,7 @@ using static ValidatingTestProject.Base.Trait;
 namespace ValidatingTestProject
 {
     [TestClass]
-    public partial class UnitTest1 : TestBase
+    public partial class JanuaryUnitTest : TestBase
     {
         /// <summary>
         /// Test empty lines can be located

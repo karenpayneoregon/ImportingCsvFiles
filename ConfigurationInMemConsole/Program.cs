@@ -10,6 +10,11 @@ namespace ConfigurationInMemConsole
     {
         static void Main(string[] args)
         {
+            Example1();
+        }
+
+        private static void Example1()
+        {
             var builder = new ConfigurationBuilder();
 
             // add static values
@@ -24,19 +29,21 @@ namespace ConfigurationInMemConsole
             // create the IConfigurationRoot instance
             IConfigurationRoot configuration = builder.Build();
 
-            string value = configuration["Environment"]; 
+            // see -> builder.AddInMemoryCollection above
+            string value = configuration["Environment"];
 
-            IConfigurationSection section = configuration.GetSection("database"); //get a section            
+            IConfigurationSection section = configuration.GetSection("database");
+                                                                                  
             var dataSections = configuration.GetSection("database").GetChildren().ToList();
 
             var connectionString = $"Data Source={dataSections[1].Value};" +
                                    $"Initial Catalog={dataSections[0].Value};" +
                                    $"Integrated Security={dataSections[2].Value}";
 
-            var emailSections = configuration.GetSection("AppSettings").GetChildren().ToList();
+            var appSections = configuration.GetSection("AppSettings").GetChildren().ToList();
 
-            Debug.WriteLine($"User name: {emailSections[2].Value}");
-            Debug.WriteLine($"In mem: {value}");
+            Debug.WriteLine($"        User name: {appSections[2].Value}");
+            Debug.WriteLine($"           In mem: {value}");
             Debug.WriteLine($"Connection string: {connectionString}");
             Debug.WriteLine("");
         }

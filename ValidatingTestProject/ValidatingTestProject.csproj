@@ -179,13 +179,23 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\NorthUnitTests.cs" />
     <Compile Include="Base\TestBase.cs" />
     <Compile Include="Base\TestTraitsAttribute.cs" />
-    <Compile Include="Base\UnitTest1.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="Base\JanuaryUnitTest.cs" />
+    <Compile Include="Classes\NorthOperations.cs" />
+    <Compile Include="JanuaryUnitTest.cs" />
+    <Compile Include="NorthUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Classes\readme.md" />
+    <None Include="Countries.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="NorthWind1.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <Content Include="readme.md" />
     <None Include="SacramentocrimeJanuary2006.csv">
