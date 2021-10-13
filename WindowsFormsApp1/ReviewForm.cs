@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using Operations;
+using Operations.SacramentoClasses;
 using ValidatingFilesApplication.Classes;
 
 namespace ValidatingFilesApplication

@@ -42,8 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataItem.cs" />
-    <Compile Include="DataItemInvalid.cs" />
+    <Compile Include="NorthWindClasses\Country.cs" />
+    <Compile Include="NorthWindClasses\CustomerItem.cs" />
+    <Compile Include="NorthWindClasses\Customers.cs" />
+    <Compile Include="SacramentoClasses\DataItem.cs" />
+    <Compile Include="SacramentoClasses\DataItemInvalid.cs" />
     <Compile Include="FileOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -53,5 +56,6 @@
       <Name>BaseLibrary</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

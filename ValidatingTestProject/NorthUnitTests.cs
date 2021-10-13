@@ -9,6 +9,8 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using ValidatingTestProject.Base;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Operations.NorthWindClasses;
+using ValidatingTestProject.Classes;
 
 namespace ValidatingTestProject
 {
@@ -18,16 +20,44 @@ namespace ValidatingTestProject
     [TestClass]
     public partial class NorthUnitTests : TestBase
     {
+        
         /// <summary>
-        /// 
+        /// Read perfect file
         /// </summary>
         [TestMethod]
-        [TestTraits(Trait.PlaceHolder)]
-        public void SimpleRead()
+        [TestTraits(Trait.NorthWindOperations)]
+        public void SimpleReadWithAddEventTest()
         {
+            NorthOperations.ReadLineHandler += NorthOperationsOnReadLineHandler;
+            NorthOperations.DelegateReadFile2(FileName);
+            NorthOperations.ReadLineHandler -= NorthOperationsOnReadLineHandler;
+
+            var test = CustomerItemsList;
+            Assert.AreEqual(CustomerItemsList.Count, 16);
 
         }
+        
 
+        [TestMethod]
+        [TestTraits(Trait.NorthWindOperations)]
+        public void HasEmptyLinesTest()
+        {
+            var list = NorthOperations.DelegateReadFile1(FileName);
+            Assert.AreEqual(list.Count, 16);
+        }
+
+        [TestMethod]
+        [TestTraits(Trait.NorthWindOperations)]
+        public void IncorrectDeliminatorsTest()
+        {
+            List<int> expected = new List<int>() { 3, 7 };
+            NorthOperations.ReadLineErrorHandler += NorthOperationsOnReadLineErrorHandler;
+            NorthOperations.DelegateReadFile2(FileName);
+
+            CollectionAssert.AreEqual(expected,InvalidIndices);
+
+
+        }
     }
 
 }

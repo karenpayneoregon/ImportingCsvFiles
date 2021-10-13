@@ -9,7 +9,8 @@ namespace ValidatingTestProject.Base
     {
         PlaceHolder,
         FileOperation,
-        GeoLocation 
+        GeoLocation ,
+        NorthWindOperations
 
     }
     /// <summary>

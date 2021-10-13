@@ -25,7 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Way off topic", "Way off to
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConfigurationInMemConsole", "ConfigurationInMemConsole\ConfigurationInMemConsole.csproj", "{6E237E3F-5A9B-401D-A4CB-C396948825C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseCoreUnitTestProject1", "BaseCoreUnitTestProject1\BaseCoreUnitTestProject1.csproj", "{92DFC4F4-52AA-436F-AE1F-F2684E867AEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseCoreUnitTestProject1", "BaseCoreUnitTestProject1\BaseCoreUnitTestProject1.csproj", "{92DFC4F4-52AA-436F-AE1F-F2684E867AEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

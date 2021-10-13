@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 // ReSharper disable once CheckNamespace
 namespace ValidatingTestProject
 {
-    public partial class JanuaryUnitTest
+    public partial class SacramentoUnitTest
     {
         private readonly string _inputFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SacramentocrimeJanuary2006.csv");
         private readonly string _inputFileNameSmall = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SacramentocrimeJanuary2006_1.csv");

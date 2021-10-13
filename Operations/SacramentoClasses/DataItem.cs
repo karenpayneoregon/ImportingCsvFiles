@@ -1,7 +1,7 @@
 ﻿using System;
 using BaseLibrary;
 
-namespace Operations
+namespace Operations.SacramentoClasses
 {
     public class DataItem
     {

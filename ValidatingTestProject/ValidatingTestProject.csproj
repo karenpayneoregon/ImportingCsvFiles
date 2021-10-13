@@ -182,15 +182,22 @@
     <Compile Include="Base\NorthUnitTests.cs" />
     <Compile Include="Base\TestBase.cs" />
     <Compile Include="Base\TestTraitsAttribute.cs" />
-    <Compile Include="Base\JanuaryUnitTest.cs" />
+    <Compile Include="Base\UnitTest.cs" />
+    <Compile Include="Classes\NorthErrorContainer.cs" />
     <Compile Include="Classes\NorthOperations.cs" />
-    <Compile Include="JanuaryUnitTest.cs" />
+    <Compile Include="SacramentoUnitTest.cs" />
     <Compile Include="NorthUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Classes\readme.md" />
     <None Include="Countries.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="NorthWindIncorrectDelimitors.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="NorthWindWithEmptyLines.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="NorthWind1.csv">

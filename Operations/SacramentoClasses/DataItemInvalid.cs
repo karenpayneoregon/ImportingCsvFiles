@@ -1,4 +1,4 @@
-﻿namespace Operations
+﻿namespace Operations.SacramentoClasses
 {
     public class DataItemInvalid
     {

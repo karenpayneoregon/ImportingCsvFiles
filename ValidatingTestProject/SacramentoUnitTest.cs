@@ -6,13 +6,14 @@ using System.Diagnostics;
 using System.IO;
 using Microsoft.VisualBasic.FileIO;
 using Operations;
+using Operations.SacramentoClasses;
 using ValidatingTestProject.Base;
 using static ValidatingTestProject.Base.Trait;
 
 namespace ValidatingTestProject
 {
     [TestClass]
-    public partial class JanuaryUnitTest : TestBase
+    public partial class SacramentoUnitTest : TestBase
     {
         /// <summary>
         /// Test empty lines can be located
