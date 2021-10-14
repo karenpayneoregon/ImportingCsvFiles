@@ -194,6 +194,9 @@
     <None Include="Countries.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="NorthWindWrongTypes.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="NorthWindIncorrectDelimitors.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

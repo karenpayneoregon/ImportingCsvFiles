@@ -56,8 +56,30 @@ namespace ValidatingTestProject
 
             CollectionAssert.AreEqual(expected,InvalidIndices);
 
+        }
+
+        [TestMethod]
+        [TestTraits(Trait.NorthWindOperations)]
+        public void TextFieldParserCleanTest()
+        {
+            var list = NorthOperations.TextFileParser(FileName);
+
+            Assert.AreEqual(list.Count, 16);
 
         }
+        [TestMethod]
+        [TestTraits(Trait.NorthWindOperations)]
+        public void TextFieldParserWrongTypeTest()
+        {
+            NorthOperations.ReadLineErrorHandler += NorthOperationsOnReadLineErrorHandler;
+            List<CustomerItem> list = NorthOperations.TextFileParser(FileName);
+            NorthOperations.ReadLineErrorHandler -= NorthOperationsOnReadLineErrorHandler;
+            Assert.AreEqual(InvalidIndices.Count, 1);
+            
+        }
     }
+
+
+
 
 }

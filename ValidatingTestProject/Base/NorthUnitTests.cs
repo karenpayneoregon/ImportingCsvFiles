@@ -33,10 +33,12 @@ namespace ValidatingTestProject
         [TestInitialize]
         public void Initialization()
         {
-            if (TestContext.TestName == nameof(SimpleReadWithAddEventTest))
-            {
+            if (TestContext.TestName == nameof(SimpleReadWithAddEventTest) || 
+                TestContext.TestName == nameof(TextFieldParserCleanTest)) {
+
                 FileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NorthWind1.csv");
                 CustomerItemsList = new List<CustomerItem>();
+
             }
 
             if (TestContext.TestName == nameof(HasEmptyLinesTest))
@@ -47,6 +49,12 @@ namespace ValidatingTestProject
             if (TestContext.TestName == nameof(IncorrectDeliminatorsTest))
             {
                 FileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NorthWindIncorrectDelimitors.csv");
+                InvalidIndices = new List<int>();
+            }
+
+            if (TestContext.TestName == nameof(TextFieldParserWrongTypeTest))
+            {
+                FileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NorthWindWrongTypes.csv");
                 InvalidIndices = new List<int>();
             }
 
@@ -71,7 +79,7 @@ namespace ValidatingTestProject
         private void NorthOperationsOnReadLineErrorHandler(NorthErrorContainer container)
         {
             InvalidIndices.Add(container.LineNumber);
-            //Debug.WriteLine($"{container.Exception.Message} | {container.LineNumber,-4:D3}[{container.Line}]");
+            Debug.WriteLine($"{container.Exception.Message} | {container.LineNumber,-4:D3}[{container.Line}]");
         }
 
     }
