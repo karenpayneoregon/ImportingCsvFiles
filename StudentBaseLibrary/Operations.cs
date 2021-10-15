@@ -16,7 +16,8 @@ namespace StudentBaseLibrary
         /// <summary>
         /// Location of files to work with
         /// </summary>
-        public static string Folder => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Files");
+        public static string Folder => 
+            Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Files");
 
         /// <summary>
         /// Location of style sheets on devweb02
@@ -49,7 +50,9 @@ namespace StudentBaseLibrary
         /// <returns></returns>
         public static List<FileInfo> GetDelimitedAndJsonFiles()
         {
-            return new DirectoryInfo(Folder).GetFilesByExtensions("*.json", "*.csv").ToList();
+            return new DirectoryInfo(Folder)
+                .GetFilesByExtensions("*.json", "*.csv")
+                .ToList();
         }
 
         /// <summary>
@@ -73,8 +76,8 @@ namespace StudentBaseLibrary
             var lines = ReadJsonFile(fileName);
 
             // append some lines
-            File.AppendAllLines(Path.Combine(Folder,fileName), 
-                Enumerable.Range(1, 12).Select((index) => DateTimeFormatInfo.CurrentInfo.GetMonthName(index)));
+            File.AppendAllLines(Path.Combine(Folder,fileName), Enumerable.Range(1, 12)
+                    .Select((index) => DateTimeFormatInfo.CurrentInfo.GetMonthName(index)));
 
             // return file with appended lines
             return ReadJsonFile(fileName);

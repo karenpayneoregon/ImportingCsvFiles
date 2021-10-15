@@ -19,7 +19,11 @@ namespace StudentUnitTestProject
              * Since one or more test will alter applications.json we get a fresh copy
              */
             var file = Path.Combine(DirectoryHelper.StudentFilesFolder(), "Files", "applications.json");
-            File.Copy(file, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Files", "applications.json"), true);
+            File.Copy(
+                file,
+                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Files", "applications.json"),
+                true);
+
 
         }
 

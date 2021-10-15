@@ -44,7 +44,7 @@ namespace FileDirOperationsUnitTest
                 "C:\\OED\\Dotnetland\\karenpayneoregon.github.io" // not Karen, this will not exists
             };
 
-            folderName = folders[2];
+            folderName = folders[0];
 
             Assert.IsTrue(Directory.Exists(folderName));
 
