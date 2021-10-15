@@ -40,5 +40,6 @@ namespace StudentBaseLibrary
 
  
         public static string StudentFilesFolder() => AppDomain.CurrentDomain.BaseDirectory.UpperFolder(4);
+
     }
 }
