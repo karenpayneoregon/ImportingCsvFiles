@@ -50,9 +50,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\DirectoryTest.cs" />
+    <Compile Include="Base\FileTest.cs" />
     <Compile Include="Base\TestBase.cs" />
     <Compile Include="Base\TestTraitsAttribute.cs" />
     <Compile Include="DirectoryTest.cs" />
+    <Compile Include="FileTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

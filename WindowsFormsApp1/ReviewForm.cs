@@ -102,8 +102,8 @@ namespace ValidatingFilesApplication
                 {
                     if (e.Control is ComboBox cb)
                     {
-                        cb.SelectionChangeCommitted -= _SelectionChangeCommitted;
-                        cb.SelectionChangeCommitted += _SelectionChangeCommitted;
+                        cb.SelectionChangeCommitted -= SelectionChangeCommitted;
+                        cb.SelectionChangeCommitted += SelectionChangeCommitted;
                     }
                 }
             }
@@ -113,7 +113,7 @@ namespace ValidatingFilesApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void _SelectionChangeCommitted(object sender, EventArgs e)
+        private void SelectionChangeCommitted(object sender, EventArgs e)
         {
             if (_bindingSource.Current !=null)
             {

@@ -30,7 +30,7 @@ namespace ValidatingFilesApplication
             CenterToScreen();
         }
 
-        private void cmdProcess_Click(object sender, EventArgs e)
+        private void ProcessButton_Click(object sender, EventArgs e)
         {
             var ops = new FileOperations();
             var (success, validRows, invalidRows, _) = ops.LoadCsvFileTextFieldParser(_inputFileName);
@@ -66,7 +66,7 @@ namespace ValidatingFilesApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cmdInspectRow_Click(object sender, EventArgs e)
+        private void InspectRowButton_Click(object sender, EventArgs e)
         {
             if (cboInspectRowIndices.DataSource == null) return;
 
@@ -88,7 +88,7 @@ namespace ValidatingFilesApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cmdReview_Click(object sender, EventArgs e)
+        private void ReviewButton_Click(object sender, EventArgs e)
         {
             if (_validDataBindingSource.DataSource == null) return;     
             
@@ -136,7 +136,7 @@ namespace ValidatingFilesApplication
             }
         }
 
-        private void cmdExit_Click(object sender, EventArgs e)
+        private void ExitButton_Click(object sender, EventArgs e)
         {
             Close();
         }

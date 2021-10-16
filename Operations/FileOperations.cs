@@ -18,7 +18,7 @@ namespace Operations
     public class FileOperations : BaseExceptionProperties
     {
 
-        private List<int> _districtValidItems = new List<int>() { 1, 2, 3, 4, 5, 6 };
+        private readonly List<int> _districtValidItems = new List<int>() { 1, 2, 3, 4, 5, 6 };
 
         /// <summary>
         /// Load file via OleDb

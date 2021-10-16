@@ -43,7 +43,9 @@
   <ItemGroup>
     <Compile Include="BaseExceptionProperties.cs" />
     <Compile Include="DirectoryHelper.cs" />
+    <Compile Include="DirectoryOperations.cs" />
     <Compile Include="FileExtensions.cs" />
+    <Compile Include="FileOperations.cs" />
     <Compile Include="GeoExtensions.cs" />
     <Compile Include="IDbExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

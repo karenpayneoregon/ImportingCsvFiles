@@ -71,7 +71,7 @@
             this.cmdProcess.TabIndex = 0;
             this.cmdProcess.Text = "Process";
             this.cmdProcess.UseVisualStyleBackColor = true;
-            this.cmdProcess.Click += new System.EventHandler(this.cmdProcess_Click);
+            this.cmdProcess.Click += new System.EventHandler(this.ProcessButton_Click);
             // 
             // dataGridViewMain
             // 
@@ -91,7 +91,7 @@
             this.cmdInspectRow.TabIndex = 2;
             this.cmdInspectRow.Text = "Inspect row";
             this.cmdInspectRow.UseVisualStyleBackColor = true;
-            this.cmdInspectRow.Click += new System.EventHandler(this.cmdInspectRow_Click);
+            this.cmdInspectRow.Click += new System.EventHandler(this.InspectRowButton_Click);
             // 
             // panel1
             // 
@@ -137,7 +137,7 @@
             this.cmdReview.TabIndex = 5;
             this.cmdReview.Text = "Review";
             this.cmdReview.UseVisualStyleBackColor = true;
-            this.cmdReview.Click += new System.EventHandler(this.cmdReview_Click);
+            this.cmdReview.Click += new System.EventHandler(this.ReviewButton_Click);
             // 
             // cmdExit
             // 
@@ -148,7 +148,7 @@
             this.cmdExit.TabIndex = 4;
             this.cmdExit.Text = "Exit";
             this.cmdExit.UseVisualStyleBackColor = true;
-            this.cmdExit.Click += new System.EventHandler(this.cmdExit_Click);
+            this.cmdExit.Click += new System.EventHandler(this.ExitButton_Click);
             // 
             // cboInspectRowIndices
             // 
