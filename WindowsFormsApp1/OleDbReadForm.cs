@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ValidatingFilesApplication.Classes;
@@ -20,6 +21,13 @@ namespace ValidatingFilesApplication
 
             _table = table;
 
+            foreach (var column in table.Columns.Cast<DataColumn>())
+            {
+                Console.WriteLine(column.ColumnName);
+            }
+
+            Console.WriteLine();
+            Console.WriteLine(table.Rows.Count);
             Shown += OnShown;
         }
 
@@ -39,7 +47,15 @@ namespace ValidatingFilesApplication
             try
             {
                 dataGridView1.SuspendLayout();
+
+                // forum question
+                //await dataGridView1.FormatColumns();
+
                 await dataGridView1.ExpandColumnsAsync();
+            }
+            catch (Exception)
+            {
+                // ignored fringe case, user closed form before finishing ExpandColumnsAsync
             }
             finally
             {
