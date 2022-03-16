@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BaseLibrary
+namespace BaseLibraryCore
 {
 	public class FoldersOperations
 	{
@@ -68,7 +68,8 @@ namespace BaseLibrary
 
 			if (fileExtensions.Any(directoryInfo.FullName.Contains))
 			{
-				await Task.Delay(1);
+                // ReSharper disable once MethodSupportsCancellation
+                await Task.Delay(1);
 				OnTraverseEvent?.Invoke(directoryInfo.FullName);
 			}
 			else

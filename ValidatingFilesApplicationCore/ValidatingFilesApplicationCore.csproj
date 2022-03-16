@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<LangVersion>9.0</LangVersion>
+		<TargetFramework>net5.0-windows</TargetFramework>
+		<UseWindowsForms>true</UseWindowsForms>
+		<AssemblyVersion>2.0.0.0</AssemblyVersion>
+		<FileVersion>2.0.0.0</FileVersion>
+		<Authors>Karen Payne</Authors>
+		<Product>Demo</Product>
+		<Description>Code sample</Description>
+		<Copyright>Use as you like</Copyright>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\BaseLibraryCore\BaseLibraryCore.csproj" />
+		<ProjectReference Include="..\OperationsCore\OperationsCore.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="SacramentocrimeJanuary2006.csv">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="SacramentocrimeJanuary2006_1.csv">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+</Project>
+

@@ -41,10 +41,11 @@ namespace FileDirOperationsUnitTest
             {
                 "C:\\Program Files\\Microsoft SQL Server\\MSSQL14.SQLEXPRESS\\MSSQL\\DATA",
                 "C:\\Program Files\\Microsoft SQL Server\\MSSQL14.SQLEXPRESS\\MSSQL\\DATA\\xtp",
+                "\\\\devweb02\\HTTP\\headfoot\\",
                 "C:\\OED\\Dotnetland\\karenpayneoregon.github.io" // not Karen, this will not exists
             };
 
-            folderName = folders[0];
+            folderName = folders[2];
 
             Assert.IsTrue(Directory.Exists(folderName));
 
@@ -58,7 +59,7 @@ namespace FileDirOperationsUnitTest
 
             try
             {
-                await RecursiveFolders(directoryInfo, new[] { "*.css", "*.html", "*.md" }, _cancellationTokenSource.Token);
+                await RecursiveFolders(directoryInfo, new[] { "*.css" }, _cancellationTokenSource.Token);
 
                 if (Cancelled)
                 {
